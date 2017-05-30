@@ -1,0 +1,69 @@
+#!/bin/bash
+#takes the test package directory as input
+
+
+echo moving FRoC output files
+cd $1
+
+
+rm -rf FRoC_Project
+rm -rf Info_Out
+
+mkdir -p FRoC_Project
+mkdir -p Info_Out
+
+
+
+mv controller_0.v FRoC_Project/controller.v
+mv top_0.v FRoC_Project/top.v
+
+mv LocationFile_0.txt FRoC_Project/LocationFile.txt
+
+echo 'project_new -family Cyclone\ IV\ E top' >> FRoC_Project/routing.tcl
+
+echo >> FRoC_Project/routing.tcl
+
+cat $1/Scripts/createFRoCProject.tcl >>  FRoC_Project/routing.tcl
+
+echo >> FRoC_Project/routing.tcl
+
+echo 'set_global_assignment -name ROUTING_BACK_ANNOTATION_FILE top.rcf' >> FRoC_Project/routing.tcl
+
+echo >> FRoC_Project/routing.tcl
+
+cat FRoC_Project/LocationFile.txt >> FRoC_Project/routing.tcl
+
+echo >> FRoC_Project/routing.tcl
+
+echo 'load_package flow' >> FRoC_Project/routing.tcl
+
+echo 'execute_flow -compile' >> FRoC_Project/routing.tcl
+
+echo 'project_close' >> FRoC_Project/routing.tcl
+
+#echo 'puts {Press Enter to continue}' >> FRoC_Project/routing.tcl
+
+echo 'exit' >> FRoC_Project/routing.tcl
+
+
+
+
+
+
+mv RCF_File_0.txt FRoC_Project/top.rcf
+
+
+mv edgeCoverage.txt Info_Out/edgeCoverage.txt
+mv pathCoverage.txt Info_Out/pathCoverage.txt
+mv VerilogFile.txt Info_Out/VerilogFile.txt
+mv FRoCOut_stats.txt Info_Out/FRoCOut_stats.txt
+
+echo copying exta verilog files
+
+cp $1/Reference_Files/Project_Files_To_Add/counter_testing.v FRoC_Project/counter_testing.v
+cp $1/Reference_Files/Project_Files_To_Add/shift_reg.v FRoC_Project/shift_reg.v
+cp $1/Reference_Files/Project_Files_To_Add/t_ff.v FRoC_Project/t_ff.v
+cp $1/Reference_Files/Project_Files_To_Add/mux2to1.v FRoC_Project/mux2to1.v
+cp $1/Reference_Files/Project_Files_To_Add/top.sdc FRoC_Project/top.sdc
+
+echo finished

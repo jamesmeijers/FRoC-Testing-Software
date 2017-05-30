@@ -1,0 +1,11 @@
+#!/bin/bash
+# Script to run FRoC
+
+#Script runs FRoC and opens new project with FRoC output
+
+
+echo getting timing
+quartus -t$1Scripts/getTiming.tcl $1
+echo done build
+
+

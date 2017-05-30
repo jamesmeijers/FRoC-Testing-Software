@@ -1,0 +1,12 @@
+#!/bin/bash
+# Script to run FRoC
+
+#Script runs FRoC and opens new project with FRoC output
+
+
+echo getting timing
+module load altera-acds/15.1.2
+quartus_sta -t$1Scripts/getTiming.tcl $1
+echo done build
+
+

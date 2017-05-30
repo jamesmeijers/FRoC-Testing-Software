@@ -1,0 +1,12 @@
+#!/bin/bash
+# Script to run FRoC
+
+#Script runs FRoC and opens new project with FRoC output
+
+
+echo building project
+module load altera-acds/15.1.2
+quartus_sh -t$1/FRoC_Project/routing.tcl &> $1/compile_output.txt
+echo done build
+
+

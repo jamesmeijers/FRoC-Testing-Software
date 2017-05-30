@@ -1,0 +1,14 @@
+#!/bin/bash
+
+g++ -o compileParser/compileparser compileParser/main.cpp 
+g++ -o DUTMaker/dutmaker DUTMaker/main.cpp
+g++ -o pathCount/pathcount pathCount/main.cpp
+g++ -o PlacementParser/hardware.o -c PlacementParser/hardware.cpp
+g++ -o PlacementParser/main.o -c PlacementParser/main.cpp
+g++ -o PlacementParser/placementparser PlacementParser/hardware.o PlacementParser/main.o
+g++ -o routingParser/main.o -c routingParser/main.cpp
+g++ -o routingParser/routing.o -c routingParser/routing.cpp
+g++ -o routingParser/routingparser routingParser/main.o routingParser/routing.o
+g++ -o SimParser/main.o -c SimParser/main.cpp
+g++ -o SimParser/LUTs.o -c SimParser/LUTs.cpp
+g++ -o SimParser/simparser SimParser/main.o SimParser/LUTs.o
