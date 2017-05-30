@@ -119,6 +119,13 @@ vector <path> readPlacementFile(ifstream & file){
                     tempLUT.X = X;
                     tempLUT.Y = Y;
                     tempLUT.N = N;
+                    
+                    getline(file, input); //get the following line to get the LUT input
+                    stringstream inputLine(input);
+                    inputLine.ignore(10, ' '); //ignore to space, next character is input number
+                    int inputNumber;
+                    inputLine >> inputNumber;
+                    tempLUT.input = inputNumber;
                     newPath.LUTPath.push_back(tempLUT);
                 }
                 else if(a == 'F'){

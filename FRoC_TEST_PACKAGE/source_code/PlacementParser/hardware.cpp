@@ -7,7 +7,7 @@
 
 //luts are the same if their coordinates are the same
 bool LUT:: operator==(LUT b){
-    if(X == b.X && Y == b.Y && N == b.N) return true;
+    if(X == b.X && Y == b.Y && N == b.N && input == b.input) return true;
     else return false;
 }
 

@@ -23,6 +23,8 @@ public:
    int X;
    int Y;
    int N;
+   //the lut input the path enters
+   int input;
    
    bool operator==(LUT b);
 };
