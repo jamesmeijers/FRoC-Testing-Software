@@ -24,16 +24,12 @@ Setting up the auto-tester
 		 selected for the test package folder
 		-CONST_PATH_TO_FRoC_DIR should be set to the location of your FRoC
 		 folder (containing multiple_paths and meta_parser folders)
-		-CONST_PATH_TO_QUARTUS should be set to the folder which contains
-		 Quartus' executables, e.g. .../bin/quartus_sh
-		-CONST_PATH_TO_MODELSIM should be set to the folder which contains
-		 Modelsim executables, e.g. .../linualoem/vsim
 	-open .../FRoC_TEST_PACKAGE/Scripts/FRoCTiming and edit the script so that 
 	 it runs the quartus_sta executable on your machine with the given command
 	-open .../FRoC_TEST_PACKAGE/Scripts/newFRoCProject and edit the script so that
 	 it runs the quartus_sh execuatable on your machine with the given command
 	-cd into the folder .../FRoC_TEST_PACKAGE/source_code and run the script 
-	 build-all-tests to build all the tests, then move each testing executable into
+	 build-all-tests to build all the tests and to move each testing executable into
 	 its respective folder in .../FRoC_TEST_PACKAGE/Tests
 	-Ensure FRoC, Quartus, Modelsim, and Python are all properly installed on
 	 your computer
@@ -182,5 +178,24 @@ Troubleshooting
 		 executable to its corresponding folder in .../Tests
 		-Look at the files in .../Reference_Files/SimFiles and ensure they are
 		 still correct
+
+Parser Assumptions
+	-The DUTMaker parses FRoC's verilog files and makes the following assumptions:
+		-In the FRoC controller.v (or controller_0.v) file, it assumes:
+			-the first reset parameter is "Reset_phase_0"
+			-the reset phase is defined by Reset_phase_0 = a'db where a and
+			 b are integers
+			-any state value >= b is a reset state
+		-In the FRoC top.v (or top_0.v) file, it assumes:
+			-There is exactly one comment preceding "//Sinks" in the file
+			-The list of sinks follows "//Sinks" on a new line, sinks are 
+			 seperated by commas and/or spaces
+			-The list of sinks is followd by two lines (containing sources)
+			 which are followed by "//intermediate signals" which is 
+			 followed by a line with the word "wire" followed by a list of signals
+			-The list of signals are seperated by commas and/or spaces
+			-If any cout signals exist, they are stated on the following line, 
+			 after the word "wire"
+			-The cout signals' names begin with 'P'
 
 

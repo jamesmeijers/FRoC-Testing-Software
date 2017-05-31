@@ -6,8 +6,7 @@ import time
 
 CONST_PATH_TO_TEST_DIR = "/home/frocbot/FRoC_TEST_PACKAGE/"
 CONST_PATH_TO_FRoC_DIR = "/home/frocbot/buildbot/worker/FRoC_build/build/"
-CONST_PATH_TO_QUARTUS = "/tools/altera/install/15.1.2/quartus/bin"
-CONST_PATH_TO_MODELSIM = "/tools/altera/install/15.1.2/modelsim_ase/linuxaloem/"
+
 PATH_TO_FRoC = CONST_PATH_TO_FRoC_DIR + "multiple_paths/build"
 PATH_TO_META = CONST_PATH_TO_FRoC_DIR + "meta_parser"
 
@@ -173,7 +172,7 @@ def runTest(timingFileName, timingFile, runSim, runRP):
 		#Run Simulation 
 		print "running simulation"
 		os.chdir(CONST_PATH_TO_TEST_DIR + "FRoC_Project/")
-		i = subprocess.call([CONST_PATH_TO_MODELSIM + "vsim -do test_top.do -c >/dev/null"], shell = True)
+		i = subprocess.call(["vsim -do test_top.do -c >/dev/null"], shell = True)
 
 		if(i != 0):
 			print "Simulation failed, exiting"
